@@ -1,13 +1,52 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JavaScript Assignments & Mini Project</title><link rel="stylesheet" href="shared.css"></head>
-<body><main class="page"><p class="badge">JavaScript · Practical Portfolio</p><h1>Assignments & Capstone Mini Project</h1><p>Six practical assignments and an interactive product inventory dashboard. Choose a task below to open its runnable HTML file.</p>
-<section><h2>Session-wise assignments</h2><div class="grid">
-<a class="tile" href="assignments/assignment-01-variables.html"><strong>01 · Variables & Types</strong><span>var, let, const, typeof, console output</span></a>
-<a class="tile" href="assignments/assignment-02-operators.html"><strong>02 · Operators & Input</strong><span>prompt(), Number(), arithmetic and formatting</span></a>
-<a class="tile" href="assignments/assignment-03-conditionals.html"><strong>03 · Conditional Logic</strong><span>if...else, switch, ternary operator</span></a>
-<a class="tile" href="assignments/assignment-04-loops.html"><strong>04 · Loops</strong><span>for, while, break, do...while, continue</span></a>
-<a class="tile" href="assignments/assignment-05-functions-scope.html"><strong>05 · Functions & Scope</strong><span>Regular/arrow functions and block scope</span></a>
-<a class="tile" href="assignments/assignment-06-arrays-objects.html"><strong>06 · Arrays & Objects</strong><span>forEach(), filter(), map()</span></a>
-</div></section>
-<section><h2>Capstone project</h2><a class="tile" href="mini-project/index.html"><strong>Interactive Product Inventory & Analytics Dashboard</strong><span>Add products, categorize them, calculate totals, filter inventory and create reports.</span></a></section>
-<p class="muted">No external libraries or installation required. See README.md for instructions and the expected example results.</p></main></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Interactive Product Inventory and Analytics Dashboard built with JavaScript by Satyam Pratap.">
+<title>Inventory Analytics Dashboard | Satyam Pratap</title>
+<link rel="stylesheet" href="../assets/app.css">
+<style>.result-line{display:flex;justify-content:space-between;gap:20px;padding:9px 0;border-bottom:1px solid #ffffff0d}.result-line:last-child{border-bottom:0}.result-line span{color:#aab8d3}.final-line{margin-top:4px;padding-top:14px;font-size:15px}.final-line strong{color:var(--mint)}.app-tag{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#aab8d3;font-size:10px;letter-spacing:.08em}</style>
+</head>
+<body>
+<main class="container app-shell">
+  <a class="back-link" href="../index.html">← Back to portfolio</a>
+  <div class="app-top"><div><p class="eyebrow">FEATURED JAVASCRIPT MINI PROJECT</p><h1>Inventory <span class="gradient-text">Analytics</span></h1><p class="app-intro">Manage products, understand stock value, and calculate tax or discounts in one responsive dashboard.</p></div><span class="app-tag">LIVE INTERACTIVE APP</span></div>
+  <div class="stats-grid">
+    <div class="stat-card"><span>PRODUCT TYPES</span><strong id="stat-products">0</strong><small>Distinct products</small></div>
+    <div class="stat-card"><span>TOTAL UNITS</span><strong id="stat-units">0</strong><small>Quantity in stock</small></div>
+    <div class="stat-card"><span>INVENTORY VALUE</span><strong id="stat-value">$0.00</strong><small>Price × quantity</small></div>
+    <div class="stat-card"><span>UNDER $200</span><strong id="stat-affordable">0</strong><small>Affordable products</small></div>
+  </div>
+  <div class="panel-grid">
+    <section class="panel">
+      <h2 id="form-title">Add a product</h2>
+      <form id="product-form">
+        <input id="product-id" type="hidden">
+        <div class="form-grid">
+          <div class="field full"><label for="product-name">Product name *</label><input id="product-name" maxlength="80" placeholder="e.g. Monitor" required></div>
+          <div class="field"><label for="product-category">Department</label><select id="product-category"><option>Electronics</option><option>Accessories</option><option>Office</option><option>Home</option><option>Other</option></select></div>
+          <div class="field"><label for="product-sku">SKU / code</label><input id="product-sku" maxlength="30" placeholder="e.g. EL-004"></div>
+          <div class="field"><label for="product-price">Unit price ($) *</label><input id="product-price" type="number" min="0" max="100000000" step="0.01" placeholder="150.00" required></div>
+          <div class="field"><label for="product-quantity">Quantity *</label><input id="product-quantity" type="number" min="0" max="1000000" step="1" value="1" required></div>
+          <div class="field full"><label for="product-notes">Notes (optional)</label><input id="product-notes" maxlength="180" placeholder="Short description or note"></div>
+        </div>
+        <div class="actions"><button id="save-button" class="btn-small btn-primary" type="submit">Add product</button><button id="cancel-edit" class="btn-small btn-dark" type="button">Clear form</button></div>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+      </form>
+      <p class="small-muted" style="margin:15px 0 0">Price tiers: Budget under $50 · Standard $50–$499.99 · Premium $500 and above.</p>
+    </section>
+    <section class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h2 style="margin-bottom:16px">Product inventory</h2><span class="small-muted" id="product-count">0 shown</span></div>
+      <div class="toolbar"><input id="search" type="search" placeholder="Search name, SKU, notes…" aria-label="Search products"><select id="filter-category" aria-label="Filter by price tier"><option value="all">All price tiers</option><option value="Budget">Budget</option><option value="Standard">Standard</option><option value="Premium">Premium</option></select><select id="sort-by" aria-label="Sort products"><option value="default">Default order</option><option value="name">Name A–Z</option><option value="price-asc">Price low–high</option><option value="price-desc">Price high–low</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th>Product</th><th>Department</th><th>Price tier</th><th>Unit price</th><th>Qty</th><th>Actions</th></tr></thead><tbody id="products-body"></tbody></table></div>
+      <div class="actions"><button class="btn-small btn-dark" id="export-csv" type="button">↓ Export CSV</button><button class="btn-small btn-dark" id="reset-sample" type="button">Restore sample data</button></div>
+    </section>
+  </div>
+  <div class="below-grid">
+    <section class="panel"><h2>Tax &amp; discount calculator</h2><p class="small-muted">Calculations use the current total inventory value (unit price × quantity).</p><div class="form-grid"><div class="field"><label for="tax-rate">Tax rate (%)</label><input id="tax-rate" type="number" min="0" max="100" step="0.1" value="8.25"></div><div class="field"><label for="discount-rate">Discount (%)</label><input id="discount-rate" type="number" min="0" max="100" step="0.1" value="10"></div></div><div class="actions"><button id="calculate-analytics" class="btn-small btn-primary" type="button">Calculate totals</button></div><div id="analytics-output" style="margin-top:14px"></div></section>
+    <section class="panel"><h2>Project logic</h2><div class="result-box"><p><strong>Data model</strong><br>Each product stores its name, department, price, quantity, SKU, and notes.</p><p><strong>Array methods</strong><br><code>filter()</code> powers search and price tiers; <code>reduce()</code> totals units and stock value; <code>sort()</code> orders the visible products; <code>map()</code> builds table rows.</p><p><strong>Persistence</strong><br>Changes are saved in this browser using <code>localStorage</code>. CSV export creates a spreadsheet-friendly file.</p></div></section>
+  </div>
+  <p class="app-footer">Created by <strong>Satyam Pratap</strong> · DDU Gorakhpur University · Internship domain: Web Development (JavaScript)</p>
+</main>
+<script src="../js/mini-project.js"></script>
+</body></html>
