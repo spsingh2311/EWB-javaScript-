@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Product Inventory & Analytics</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page">
+<div class="topline"><a href="../index.html">← All assignments</a><span class="badge">Capstone Mini Project</span></div>
+<h1>Interactive Product Inventory & Analytics Dashboard</h1>
+<p>Add and manage products, view price categories, and calculate inventory analytics. This project demonstrates JavaScript input validation, conditionals, loops, functions, scope, and array methods.</p>
+<section><h2>Add a product</h2><form id="product-form">
+<div class="field"><label for="product-name">Product name</label><input id="product-name" name="product-name" placeholder="e.g. Monitor" maxlength="80" required></div>
+<div class="field"><label for="product-price">Price ($)</label><input id="product-price" name="product-price" type="number" min="0.01" step="0.01" placeholder="150" required></div>
+<div class="actions"><button type="submit">Add product</button><button class="secondary" id="reset-button" type="button">Reset demo data</button></div>
+<p id="message" aria-live="polite" class="muted"></p></form></section>
+<section><h2>Financial analytics</h2><div class="stats">
+<div class="stat"><span>Products</span><strong id="product-count">0</strong></div>
+<div class="stat"><span>Total inventory value</span><strong id="total-value">$0.00</strong></div>
+<div class="stat"><span>Tax estimate (8%)</span><strong id="tax-value">$0.00</strong></div>
+<div class="stat"><span>Value after 10% discount</span><strong id="discount-value">$0.00</strong></div>
+</div></section>
+<section><div class="topline"><h2>Inventory roster</h2><div class="field" style="min-width:210px;margin:0"><label for="search">Search products</label><input id="search" placeholder="Type a product name"></div></div>
+<div class="table-wrap"><table><thead><tr><th>Product</th><th>Price</th><th>Category</th><th>Action</th></tr></thead><tbody id="inventory-body"></tbody></table></div><p id="empty-state" class="muted" hidden>No products match your search.</p></section>
+<section><h2>Reports</h2><div class="actions"><button id="show-affordable" class="secondary" type="button">Show products under $200</button><button id="show-all" class="secondary" type="button">Show all products</button><button id="console-demo" type="button">Run console demo</button></div><pre id="report">Reports will appear here.</pre></section>
+<script src="app.js"></script>
+</main></body></html>

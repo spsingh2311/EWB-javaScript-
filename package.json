@@ -1,0 +1,9 @@
+{
+  "name": "javascript-assignments-mini-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Six JavaScript practical assignments and an interactive inventory analytics capstone.",
+  "scripts": {
+    "start": "echo Open index.html in your browser; no server required"
+  }
+}

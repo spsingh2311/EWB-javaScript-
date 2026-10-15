@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 5 — Functions and Scope</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 5: Function Architecture and Scope</h1><p>Open Developer Tools → Console to inspect the scope error demonstration.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message) { console.log(message); output.textContent += message + "\n"; }
+
+function rectangleArea(length = 5, width = 4) {
+  return length * width;
+}
+const arrowRectangleArea = (length = 5, width = 4) => length * width;
+
+log(`Standard Function Area (Default 5x4): ${rectangleArea()}`);
+log(`Arrow Function Area (Custom 10x3): ${arrowRectangleArea(10, 3)}`);
+
+try {
+  if (true) {
+    let blockVar = "I exist only inside this block";
+    console.log("Inside block:", blockVar);
+  }
+  // This access intentionally demonstrates block scope.
+  console.log(blockVar);
+} catch (error) {
+  const message = `Scope Test Error: ${error.name}: blockVar is not defined`;
+  log(message);
+}
+</script></main></body></html>

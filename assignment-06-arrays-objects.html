@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 6 — Arrays and Objects</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 6: Arrays, Objects, and Core Methods</h1><p>Output is shown below and in the browser console.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message = "") { console.log(message); output.textContent += message + "\n"; }
+
+const products = [
+  { name: "Laptop", price: 800 },
+  { name: "Mouse", price: 25 },
+  { name: "Keyboard", price: 45 }
+];
+
+log("-- All Products (forEach) --");
+products.forEach(product => log(`Item: ${product.name} - Price: $${product.price}`));
+
+log("\n-- Filtered Products (Price < $50) --");
+const affordableProducts = products.filter(product => product.price < 50);
+log(JSON.stringify(affordableProducts, null, 2));
+
+log("\n-- Mapped Product Tags (map) --");
+const productTags = products.map(product => `${product.name.toUpperCase()} costs $${product.price}`);
+log(JSON.stringify(productTags, null, 2));
+</script></main></body></html>

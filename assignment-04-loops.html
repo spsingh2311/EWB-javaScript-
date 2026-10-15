@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 4 — Loops</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 4: Loop Control Structures</h1><p>Output is shown below and in the browser console.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message = "") { console.log(message); output.textContent += message + "\n"; }
+
+log("-- Multiplication Table of 5 --");
+for (let i = 1; i <= 5; i++) log(`5 x ${i} = ${5 * i}`);
+
+log("\n-- First number > 10 divisible by 6 --");
+let number = 11;
+while (number <= 100) {
+  if (number > 10 && number % 6 === 0) {
+    log(`Found: ${number}`);
+    break;
+  }
+  number++;
+}
+
+log("\n-- do...while with continue (skip even numbers) --");
+let count = 0;
+do {
+  count++;
+  if (count % 2 === 0) continue;
+  log(`Odd number: ${count}`);
+} while (count < 5);
+</script></main></body></html>

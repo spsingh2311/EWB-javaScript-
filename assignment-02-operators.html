@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 2 — Operators</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 2: Operators, Expressions, and Input Handling</h1><p>Enter a bill subtotal and tip percentage. The example values in the brief are $100 and 15%.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message) { console.log(message); output.textContent += message + "\n"; }
+
+const subtotalInput = prompt("Enter the bill subtotal:", "100");
+const tipInput = prompt("Enter the tip percentage:", "15");
+const subtotal = Number(subtotalInput);
+const tipPercentage = Number(tipInput);
+
+if (subtotalInput === null || tipInput === null) {
+  log("Input cancelled. Refresh the page to try again.");
+} else if (!Number.isFinite(subtotal) || !Number.isFinite(tipPercentage) || subtotal < 0 || tipPercentage < 0) {
+  log("Invalid input: enter non-negative numeric values for subtotal and tip percentage.");
+} else {
+  const calculatedTip = subtotal * (tipPercentage / 100);
+  let total = subtotal;
+  total += calculatedTip; // Demonstrates the addition-assignment operator.
+  log(`Subtotal: $${subtotal.toFixed(2).replace(/\.00$/, "")}`);
+  log(`Tip Percentage: ${tipPercentage}%`);
+  log(`Calculated Tip: $${calculatedTip.toFixed(2).replace(/\.00$/, "")}`);
+  log(`Total Amount to Pay: $${total.toFixed(2).replace(/\.00$/, "")}`);
+}
+</script></main></body></html>

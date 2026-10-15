@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 1 — Variables and Types</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 1: Variables, Data Types, and Console Operations</h1><p>Open Developer Tools → Console to view the output.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message) { console.log(message); output.textContent += message + "\n"; }
+
+// Required declarations using var, let, and const.
+var name = "Alice";
+let age = 25;
+const isEmployed = true;
+const skills = ["HTML", "CSS", "JavaScript"];
+
+log(`Name: ${name} (Type: ${typeof name})`);
+log(`Age: ${age} (Type: ${typeof age})`);
+log(`Is Employed: ${isEmployed} (Type: ${typeof isEmployed})`);
+log(`Skills: ${JSON.stringify(skills)} (Type: ${typeof skills})`);
+</script></main></body></html>

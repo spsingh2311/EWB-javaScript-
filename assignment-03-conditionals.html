@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assignment 3 — Conditionals</title><link rel="stylesheet" href="../shared.css"></head>
+<body><main class="page"><a href="../index.html">← Project home</a><h1>Assignment 3: Conditional Logic Implementation</h1><p>Enter a score from 0 to 100. A score of 85 produces grade B, as in the brief.</p><pre id="output"></pre><script>
+const output = document.querySelector("#output");
+function log(message) { console.log(message); output.textContent += message + "\n"; }
+
+const scoreInput = prompt("Enter a test score (0–100):", "85");
+if (scoreInput === null) {
+  log("Input cancelled. Refresh the page to try again.");
+} else {
+  const score = Number(scoreInput);
+  if (!Number.isFinite(score) || score < 0 || score > 100) {
+    log("Invalid score. Enter a number from 0 to 100.");
+  } else {
+    let grade;
+    if (score >= 90) grade = "A";
+    else if (score >= 80) grade = "B";
+    else if (score >= 70) grade = "C";
+    else if (score >= 60) grade = "D";
+    else grade = "F";
+
+    // A switch statement maps the grade to a display label.
+    let gradeLabel;
+    switch (grade) {
+      case "A": gradeLabel = "A"; break;
+      case "B": gradeLabel = "B"; break;
+      case "C": gradeLabel = "C"; break;
+      case "D": gradeLabel = "D"; break;
+      default: gradeLabel = "F"; break;
+    }
+    const status = score >= 40 ? "Passed" : "Failed";
+    log(`Score: ${score}`);
+    log(`Grade: ${gradeLabel}`);
+    log(`Status: ${status}`);
+  }
+}
+</script></main></body></html>
